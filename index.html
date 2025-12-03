@@ -3,48 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DINOBOT COMPANY | Soluciones Digitales</title>
+    <meta name="description" content="Dinobot Company: Agencia de Desarrollo Web y Diseño Digital de alto impacto.">
+    <title>DINOBOT COMPANY | Next-Gen Digital Agency</title>
     
-    <!-- 1. LIBRERÍAS EXTERNAS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
-    <!-- CONFIGURACIÓN DE TAILWIND -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { sans: ['Outfit', 'sans-serif'] },
+                    fontFamily: { sans: ['Space Grotesk', 'sans-serif'] }, // Fuente más "Tech"
                     colors: {
                         brand: {
-                            dark: '#0f172a',
-                            cyan: '#06b6d4',
+                            dark: '#020617', // Slate 950
+                            cyan: '#22d3ee', // Cyan 400
                             blue: '#3b82f6',
-                            purple: '#8b5cf6', // Color extra para secciones nuevas
+                            purple: '#a855f7',
+                            accent: '#f472b6' // Pink para contrastes
                         }
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #1e293b 1px, transparent 1px), linear-gradient(to bottom, #1e293b 1px, transparent 1px)",
                     },
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
-                        'float-fast': 'float 4s ease-in-out infinite',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'gradient-x': 'gradient-x 3s ease infinite',
-                        'shine': 'shine 1.5s infinite',
-                        'spin-slow': 'spin 12s linear infinite',
+                        'blob': 'blob 7s infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
                     },
                     keyframes: {
                         float: {
                             '0%, 100%': { transform: 'translateY(0)' },
                             '50%': { transform: 'translateY(-20px)' },
                         },
-                        'gradient-x': {
-                            '0%, 100%': { 'background-size': '200% 200%', 'background-position': 'left center' },
-                            '50%': { 'background-size': '200% 200%', 'background-position': 'right center' },
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
                         },
-                        shine: {
-                            '0%': { transform: 'skewX(-15deg) translateX(-150%)' },
-                            '50%': { transform: 'skewX(-15deg) translateX(150%)' },
-                            '100%': { transform: 'skewX(-15deg) translateX(150%)' },
+                        glow: {
+                            'from': { boxShadow: '0 0 10px -10px rgba(34, 211, 238, 0)' },
+                            'to': { boxShadow: '0 0 20px 5px rgba(34, 211, 238, 0.3)' }
                         }
                     }
                 }
@@ -52,468 +53,410 @@
         }
     </script>
 
-    <!-- 2. ESTILOS PERSONALIZADOS -->
     <style>
+        /* Cursor Personalizado */
         body {
-            background-color: #050505;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(6, 182, 212, 0.08) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 20%);
+            cursor: none; /* Ocultamos el cursor por defecto */
+            background-color: #020617;
             overflow-x: hidden;
         }
-
-        /* Glassmorphism Genérico */
-        .glass {
-            background: rgba(30, 41, 59, 0.3);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        /* Navbar */
-        .glass-nav {
-            background: rgba(5, 5, 5, 0.85);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
-        }
-        .glass-nav.scrolled {
-            box-shadow: 0 4px 20px rgba(6, 182, 212, 0.2);
-            border-bottom: 1px solid rgba(6, 182, 212, 0.3);
-            background: rgba(5, 5, 5, 0.98);
-        }
-
-        /* Logo con efecto */
-        .glass-logo {
-            background: rgba(15, 23, 42, 0.6);
-            box-shadow: 0 0 30px rgba(6, 182, 212, 0.15);
-            border: 1px solid rgba(6, 182, 212, 0.3);
-            backdrop-filter: blur(12px);
-            transition: all 0.5s ease;
-        }
-        .glass-logo:hover {
-            box-shadow: 0 0 60px rgba(6, 182, 212, 0.5);
-            border-color: rgba(6, 182, 212, 0.8);
-            transform: scale(1.02);
-        }
-
-        /* Tarjetas de Servicio */
-        .service-card {
-            background: rgba(30, 41, 59, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.4s ease;
-        }
-        .service-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(6, 182, 212, 0.5);
-            box-shadow: 0 20px 40px -10px rgba(6, 182, 212, 0.2);
-        }
-
-        /* Tarjetas de Proyecto (Portafolio) */
-        .project-card {
-            overflow: hidden;
-            position: relative;
-            border-radius: 1rem;
-        }
-        .project-overlay {
-            background: linear-gradient(to top, rgba(15, 23, 42, 0.95), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .project-card:hover .project-overlay { opacity: 1; }
-        .project-card:hover img { transform: scale(1.1); }
-
-        /* Iconos Sociales */
-        .social-icon { transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
-        .social-icon:hover { transform: translateY(-5px) scale(1.1); }
-
-        /* Utilidades */
-        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-        .text-glow { text-shadow: 0 0 30px rgba(6, 182, 212, 0.6); }
         
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 5px; }
-        ::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
+        #custom-cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #22d3ee;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background-color 0.3s;
+            mix-blend-mode: difference;
+        }
+        #custom-cursor.hovered {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(34, 211, 238, 0.2);
+            border-color: transparent;
+        }
+
+        /* Fondo Animado de Rejilla */
+        .cyber-grid {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: linear-gradient(rgba(34, 211, 238, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(34, 211, 238, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            transform: perspective(500px) rotateX(60deg) translateY(-100px) scale(2);
+            animation: gridMove 20s linear infinite;
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
+        }
+
+        @keyframes gridMove {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0) scale(2); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(50px) scale(2); }
+        }
+
+        /* Glassmorphism Ultra */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .glass-card {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.6) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.1s ease-out; /* Rápido para el efecto 3D */
+            transform-style: preserve-3d;
+        }
+
+        /* Efectos de Texto */
+        .text-gradient-main {
+            background: linear-gradient(to right, #22d3ee, #e879f9, #22d3ee);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 3s linear infinite;
+        }
+
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #22d3ee; }
     </style>
 </head>
 <body class="text-slate-300 antialiased selection:bg-brand-cyan selection:text-black">
 
-    <!-- LOGO CENTRAL -->
-    <div class="flex justify-center items-center w-full pt-10 pb-6 bg-transparent relative z-20">
-        <div class="glass-logo w-40 h-40 md:w-52 md:h-52 rounded-3xl flex items-center justify-center overflow-hidden p-6 group cursor-pointer animate-float">
-            <!-- IMAGEN LOGO -->
-            <img src="logo.png" alt="Dinobot Logo" 
-                 class="w-full h-full object-contain filter drop-shadow-[0_0_15px_rgba(6,182,212,0.4)] transition-all duration-500 group-hover:scale-110" 
-                 onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fa-solid fa-dragon text-7xl text-brand-cyan animate-pulse\'></i>';" />
-        </div>
-    </div>
+    <div id="custom-cursor" class="hidden md:block"></div>
 
-    <!-- NAVBAR -->
-    <nav class="sticky top-0 w-full z-50 glass-nav" id="navbar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="cyber-grid"></div>
+    <div class="fixed top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-[#020617]/50 to-[#020617] -z-1 pointer-events-none"></div>
+
+    <nav class="fixed top-0 w-full z-50 transition-all duration-300 border-b border-transparent" id="navbar">
+        <div class="absolute inset-0 bg-[#020617]/80 backdrop-blur-md -z-10"></div>
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
-                
-                <!-- Logo Texto -->
-                <a href="#" class="flex items-center gap-2 group">
-                    <i class="fa-solid fa-robot text-2xl text-brand-cyan group-hover:rotate-12 transition-transform duration-300"></i>
+                <a href="#" class="flex items-center gap-3 group interactable">
+                    <div class="relative w-10 h-10 flex items-center justify-center bg-brand-cyan/10 rounded-lg border border-brand-cyan/30 overflow-hidden group-hover:border-brand-cyan transition-colors">
+                        <i class="fa-solid fa-dragon text-xl text-brand-cyan relative z-10"></i>
+                        <div class="absolute inset-0 bg-brand-cyan/20 blur-md group-hover:bg-brand-cyan/40 transition-all"></div>
+                    </div>
                     <div class="flex flex-col">
-                        <span class="font-black text-lg text-white tracking-wider leading-none">DINO</span>
-                        <span class="text-[10px] font-bold text-brand-cyan tracking-[0.3em] uppercase leading-none">COMPANY</span>
+                        <span class="font-bold text-xl text-white tracking-wide leading-none">DINOBOT</span>
+                        <span class="text-[10px] font-medium text-brand-cyan tracking-[0.4em] uppercase leading-none opacity-80">Studios</span>
                     </div>
                 </a>
 
-                <!-- Menú PC -->
-                <div class="hidden lg:flex items-center space-x-8">
-                    <a href="#inicio" class="text-sm font-medium hover:text-brand-cyan transition-colors">Inicio</a>
-                    <a href="#servicios" class="text-sm font-medium hover:text-brand-cyan transition-colors">Servicios</a>
-                    <a href="#proceso" class="text-sm font-medium hover:text-brand-cyan transition-colors">Proceso</a>
-                    <a href="#portafolio" class="text-sm font-medium hover:text-brand-cyan transition-colors">Portafolio</a>
-                    <a href="#contacto" class="relative overflow-hidden px-6 py-2.5 bg-gradient-to-r from-brand-cyan to-brand-blue text-black font-bold rounded-full text-sm transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(6,182,212,0.4)] group">
-                        <span class="relative z-10 flex items-center"><i class="fa-brands fa-whatsapp mr-2"></i> Cotizar</span>
-                        <div class="absolute inset-0 bg-white/30 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500"></div>
+                <div class="hidden lg:flex items-center gap-8">
+                    <a href="#inicio" class="text-sm font-medium hover:text-brand-cyan transition-colors interactable">Inicio</a>
+                    <a href="#servicios" class="text-sm font-medium hover:text-brand-cyan transition-colors interactable">Servicios</a>
+                    <a href="#portafolio" class="text-sm font-medium hover:text-brand-cyan transition-colors interactable">Portafolio</a>
+                    <a href="#contacto" class="px-6 py-2.5 bg-white text-black font-bold rounded-full text-sm hover:bg-brand-cyan transition-all transform hover:scale-105 shadow-[0_0_15px_rgba(255,255,255,0.3)] interactable">
+                        Iniciar Proyecto
                     </a>
                 </div>
 
-                <!-- Botón Hamburguesa -->
-                <div class="lg:hidden">
-                    <button onclick="toggleMenu()" class="text-white text-2xl p-2 hover:text-brand-cyan">
-                        <i id="menuIcon" class="fa-solid fa-bars"></i>
-                    </button>
-                </div>
+                <button onclick="toggleMenu()" class="lg:hidden text-white text-2xl interactable">
+                    <i id="menuIcon" class="fa-solid fa-bars"></i>
+                </button>
             </div>
         </div>
 
-        <!-- Menú Móvil -->
-        <div id="mobileMenu" class="hidden lg:hidden bg-slate-900 border-t border-slate-800 absolute w-full shadow-2xl">
-            <div class="px-4 py-6 space-y-4">
-                <a href="#inicio" onclick="toggleMenu()" class="block text-white font-medium hover:text-brand-cyan border-l-2 border-transparent pl-3 hover:border-brand-cyan">Inicio</a>
-                <a href="#servicios" onclick="toggleMenu()" class="block text-white font-medium hover:text-brand-cyan border-l-2 border-transparent pl-3 hover:border-brand-cyan">Servicios</a>
-                <a href="#proceso" onclick="toggleMenu()" class="block text-white font-medium hover:text-brand-cyan border-l-2 border-transparent pl-3 hover:border-brand-cyan">Proceso</a>
-                <a href="#portafolio" onclick="toggleMenu()" class="block text-white font-medium hover:text-brand-cyan border-l-2 border-transparent pl-3 hover:border-brand-cyan">Portafolio</a>
-                <a href="#contacto" onclick="toggleMenu()" class="block text-brand-cyan font-bold bg-slate-800/50 p-3 rounded-lg text-center">Contactar Ahora</a>
+        <div id="mobileMenu" class="hidden lg:hidden bg-[#020617] border-b border-white/10 absolute w-full backdrop-blur-xl">
+            <div class="px-6 py-8 space-y-6">
+                <a href="#inicio" onclick="toggleMenu()" class="block text-xl text-white font-medium">Inicio</a>
+                <a href="#servicios" onclick="toggleMenu()" class="block text-xl text-white font-medium">Servicios</a>
+                <a href="#portafolio" onclick="toggleMenu()" class="block text-xl text-white font-medium">Portafolio</a>
+                <a href="#contacto" onclick="toggleMenu()" class="block text-center bg-brand-cyan text-black font-bold py-3 rounded-xl mt-4">Contactar</a>
             </div>
         </div>
     </nav>
 
-    <!-- HERO -->
-    <section id="inicio" class="relative pt-16 pb-24 overflow-hidden">
-        <div class="absolute top-20 right-10 w-64 h-64 bg-brand-cyan/20 rounded-full blur-[100px] animate-pulse-slow"></div>
-        <div class="absolute bottom-10 left-10 w-80 h-80 bg-brand-purple/15 rounded-full blur-[100px]"></div>
+    <section id="inicio" class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+        <div class="absolute top-20 left-1/4 w-72 h-72 bg-brand-purple/20 rounded-full mix-blend-screen filter blur-[100px] animate-blob"></div>
+        <div class="absolute top-20 right-1/4 w-72 h-72 bg-brand-cyan/20 rounded-full mix-blend-screen filter blur-[100px] animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-32 left-1/3 w-72 h-72 bg-brand-blue/20 rounded-full mix-blend-screen filter blur-[100px] animate-blob animation-delay-4000"></div>
 
-        <div class="max-w-7xl mx-auto px-4 text-center relative z-10">
-            <span class="reveal inline-block py-1 px-4 rounded-full bg-brand-cyan/10 border border-brand-cyan/20 text-brand-cyan text-xs font-bold uppercase tracking-wider mb-6 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
-                <span class="w-2 h-2 rounded-full bg-brand-cyan inline-block mr-2 animate-ping absolute opacity-75"></span>
-                <span class="w-2 h-2 rounded-full bg-brand-cyan inline-block mr-2 relative"></span> 
-                Abiertos a nuevos proyectos
-            </span>
-            <h1 class="reveal text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 leading-tight">
-                CREAMOS TU <br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan via-white to-brand-purple animate-gradient-x text-glow">IMPERIO DIGITAL</span>
-            </h1>
-            <p class="reveal text-lg text-slate-400 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
-                No somos solo una agencia. Somos tu socio tecnológico. <strong>Dinobot Company</strong> combina diseño futurista, código limpio y voces profesionales para destacar tu marca.
-            </p>
-            <div class="reveal flex flex-col sm:flex-row justify-center gap-5">
-                <a href="#contacto" class="relative overflow-hidden px-8 py-4 bg-brand-cyan text-black font-bold rounded-xl hover:scale-105 transition-all flex items-center justify-center gap-2 shadow-[0_0_30px_rgba(6,182,212,0.4)]">
-                    <span class="relative z-10">Iniciar Proyecto</span>
-                    <i class="fa-solid fa-rocket relative z-10"></i>
-                </a>
-                <a href="#portafolio" class="px-8 py-4 border border-slate-600 text-white font-bold rounded-xl hover:bg-white/5 hover:border-brand-cyan transition-all">
-                    Ver Trabajos
-                </a>
+        <div class="max-w-7xl mx-auto px-6 relative z-10 w-full">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2 text-center lg:text-left">
+                    <div class="reveal inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand-cyan/30 bg-brand-cyan/5 text-brand-cyan text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-sm">
+                        <span class="w-2 h-2 rounded-full bg-brand-cyan animate-pulse"></span>
+                        Disponible para trabajar
+                    </div>
+                    
+                    <h1 class="reveal text-5xl md:text-7xl lg:text-8xl font-black text-white mb-6 leading-[0.9]">
+                        FORJAMOS <br>
+                        <span class="text-gradient-main">EL FUTURO</span>
+                        <br>DIGITAL
+                    </h1>
+                    
+                    <p class="reveal text-lg text-slate-400 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                        Dinobot combina diseño de vanguardia con código robusto. Transformamos ideas complejas en experiencias digitales fluidas y memorables.
+                    </p>
+                    
+                    <div class="reveal flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#portafolio" class="group relative px-8 py-4 bg-brand-cyan text-black font-bold rounded-xl overflow-hidden interactable">
+                            <span class="relative z-10 group-hover:text-white transition-colors duration-300">Ver Proyectos</span>
+                            <div class="absolute inset-0 bg-black scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 ease-out"></div>
+                        </a>
+                        <a href="#contacto" class="px-8 py-4 border border-white/20 text-white font-bold rounded-xl hover:bg-white/5 hover:border-brand-cyan transition-all interactable">
+                            Hablemos
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:w-1/2 relative reveal" style="transition-delay: 200ms;">
+                    <div class="relative w-full aspect-square max-w-[500px] mx-auto animate-float">
+                        <div class="absolute inset-0 border border-brand-cyan/20 rounded-full animate-[spin_10s_linear_infinite]"></div>
+                        <div class="absolute inset-4 border border-brand-purple/20 rounded-full animate-[spin_15s_linear_infinite_reverse]"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                             <div class="w-64 h-64 bg-gradient-to-tr from-brand-dark to-slate-800 rounded-3xl rotate-12 flex items-center justify-center border border-white/10 shadow-2xl shadow-brand-cyan/20 backdrop-blur-xl tilt-element">
+                                <i class="fa-solid fa-code text-8xl text-transparent bg-clip-text bg-gradient-to-br from-brand-cyan to-brand-purple"></i>
+                             </div>
+                             <div class="absolute w-64 h-64 bg-black/50 rounded-3xl -rotate-6 -z-10 border border-white/5 tilt-element"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- SERVICIOS -->
-    <section id="servicios" class="py-24 relative bg-slate-900/30">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-16 reveal">
-                <h2 class="text-3xl md:text-5xl font-bold text-white mb-4">Nuestros Servicios</h2>
-                <div class="w-24 h-1.5 bg-gradient-to-r from-brand-cyan to-brand-purple mx-auto rounded-full"></div>
+    <section id="servicios" class="py-32 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-20 text-center reveal">
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">Ecosistema de Servicios</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">Soluciones integrales diseñadas para escalar tu negocio en el entorno digital.</p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Locución -->
-                <div class="reveal service-card p-8 rounded-2xl group relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-brand-cyan/10 rounded-full blur-2xl group-hover:bg-brand-cyan/20 transition-all"></div>
-                    <div class="w-16 h-16 bg-slate-800 rounded-xl flex items-center justify-center text-brand-cyan text-3xl mb-6 shadow-lg group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-microphone-lines"></i>
+                <div class="tilt-card glass-card p-1 rounded-3xl relative group interactable">
+                    <div class="absolute inset-0 bg-gradient-to-r from-brand-cyan to-brand-blue rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500"></div>
+                    <div class="bg-[#0f172a]/90 backdrop-blur-xl h-full p-8 rounded-[22px] relative z-10 flex flex-col items-start border border-white/5">
+                        <div class="w-14 h-14 bg-brand-cyan/10 rounded-xl flex items-center justify-center text-brand-cyan text-2xl mb-6 group-hover:scale-110 group-hover:bg-brand-cyan group-hover:text-black transition-all duration-300">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">Desarrollo Web</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6">Sitios ultra rápidos, e-commerce escalables y aplicaciones web progresivas (PWA) construidas con código limpio.</p>
+                        <ul class="text-xs text-slate-500 space-y-2 mt-auto">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-cyan"></i> Landing Pages</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-cyan"></i> Dashboards</li>
+                        </ul>
                     </div>
-                    <h3 class="text-2xl font-bold text-white mb-3">Locución Pro</h3>
-                    <p class="text-slate-400 mb-4">Voces que venden. Narraciones, spots comerciales y doblaje con calidad de estudio.</p>
                 </div>
 
-                <!-- Web -->
-                <div class="reveal service-card p-8 rounded-2xl group border-brand-cyan/30 relative">
-                    <div class="absolute -top-3 right-8 bg-brand-cyan text-black text-[10px] font-bold px-3 py-1 rounded-full">POPULAR</div>
-                    <div class="w-16 h-16 bg-slate-800 rounded-xl flex items-center justify-center text-brand-cyan text-3xl mb-6 shadow-lg group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-code"></i>
+                <div class="tilt-card glass-card p-1 rounded-3xl relative group interactable">
+                    <div class="absolute inset-0 bg-gradient-to-r from-brand-purple to-brand-accent rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500"></div>
+                    <div class="bg-[#0f172a]/90 backdrop-blur-xl h-full p-8 rounded-[22px] relative z-10 flex flex-col items-start border border-white/5">
+                        <div class="w-14 h-14 bg-brand-purple/10 rounded-xl flex items-center justify-center text-brand-purple text-2xl mb-6 group-hover:scale-110 group-hover:bg-brand-purple group-hover:text-white transition-all duration-300">
+                            <i class="fa-solid fa-microphone-lines"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">Locución Pro</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6">Dale voz a tu marca. Grabación en estudio profesional para spots, videos corporativos y doblaje.</p>
+                        <ul class="text-xs text-slate-500 space-y-2 mt-auto">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-purple"></i> Edición de Audio</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-purple"></i> Masterización</li>
+                        </ul>
                     </div>
-                    <h3 class="text-2xl font-bold text-white mb-3">Desarrollo Web</h3>
-                    <p class="text-slate-400 mb-4">Sitios rápidos y responsivos. Desde Landing Pages hasta E-commerce completos.</p>
                 </div>
 
-                <!-- Diseño -->
-                <div class="reveal service-card p-8 rounded-2xl group relative overflow-hidden">
-                    <div class="w-16 h-16 bg-slate-800 rounded-xl flex items-center justify-center text-brand-cyan text-3xl mb-6 shadow-lg group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-pen-nib"></i>
+                <div class="tilt-card glass-card p-1 rounded-3xl relative group interactable">
+                    <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500"></div>
+                    <div class="bg-[#0f172a]/90 backdrop-blur-xl h-full p-8 rounded-[22px] relative z-10 flex flex-col items-start border border-white/5">
+                        <div class="w-14 h-14 bg-brand-blue/10 rounded-xl flex items-center justify-center text-brand-blue text-2xl mb-6 group-hover:scale-110 group-hover:bg-brand-blue group-hover:text-white transition-all duration-300">
+                            <i class="fa-solid fa-pen-nib"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">Diseño UI/UX</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6">Interfaces hermosas y funcionales. Diseñamos pensando en la experiencia del usuario final.</p>
+                        <ul class="text-xs text-slate-500 space-y-2 mt-auto">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-blue"></i> Prototipado</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-blue"></i> Branding</li>
+                        </ul>
                     </div>
-                    <h3 class="text-2xl font-bold text-white mb-3">Diseño Gráfico</h3>
-                    <p class="text-slate-400 mb-4">Branding e identidad visual. Logotipos que hacen que tu marca sea inolvidable.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- NUEVA SECCIÓN: NUESTRO PROCESO -->
-    <section id="proceso" class="py-24 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-16 reveal">
-                <span class="text-brand-cyan font-bold tracking-widest text-sm uppercase">Cómo trabajamos</span>
-                <h2 class="text-3xl md:text-5xl font-bold text-white mt-2">Tu Camino al Éxito</h2>
-            </div>
-
-            <div class="grid md:grid-cols-4 gap-8 relative z-10">
-                <!-- Línea conectora (solo PC) -->
-                <div class="hidden md:block absolute top-12 left-0 w-full h-1 bg-slate-800 -z-10"></div>
-
-                <!-- Paso 1 -->
-                <div class="reveal text-center group">
-                    <div class="w-24 h-24 mx-auto bg-slate-900 border-2 border-slate-700 rounded-full flex items-center justify-center text-3xl text-slate-500 mb-6 group-hover:border-brand-cyan group-hover:text-brand-cyan transition-all shadow-xl bg-slate-900">
-                        <i class="fa-regular fa-comments"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2">1. Idea</h3>
-                    <p class="text-sm text-slate-400">Hablamos de tus objetivos y planificamos la estrategia perfecta.</p>
-                </div>
-
-                <!-- Paso 2 -->
-                <div class="reveal text-center group" style="transition-delay: 100ms;">
-                    <div class="w-24 h-24 mx-auto bg-slate-900 border-2 border-slate-700 rounded-full flex items-center justify-center text-3xl text-slate-500 mb-6 group-hover:border-brand-purple group-hover:text-brand-purple transition-all shadow-xl bg-slate-900">
-                        <i class="fa-solid fa-pencil-ruler"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2">2. Diseño</h3>
-                    <p class="text-sm text-slate-400">Creamos bocetos y prototipos visuales de alto impacto.</p>
-                </div>
-
-                <!-- Paso 3 -->
-                <div class="reveal text-center group" style="transition-delay: 200ms;">
-                    <div class="w-24 h-24 mx-auto bg-slate-900 border-2 border-slate-700 rounded-full flex items-center justify-center text-3xl text-slate-500 mb-6 group-hover:border-brand-blue group-hover:text-brand-blue transition-all shadow-xl bg-slate-900">
-                        <i class="fa-solid fa-code"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2">3. Desarrollo</h3>
-                    <p class="text-sm text-slate-400">Programamos y grabamos todo con la última tecnología.</p>
-                </div>
-
-                <!-- Paso 4 -->
-                <div class="reveal text-center group" style="transition-delay: 300ms;">
-                    <div class="w-24 h-24 mx-auto bg-slate-900 border-2 border-slate-700 rounded-full flex items-center justify-center text-3xl text-slate-500 mb-6 group-hover:border-green-500 group-hover:text-green-500 transition-all shadow-xl bg-slate-900">
-                        <i class="fa-solid fa-rocket"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2">4. Lanzamiento</h3>
-                    <p class="text-sm text-slate-400">Publicamos tu proyecto y te enseñamos a administrarlo.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- NUEVA SECCIÓN: PORTAFOLIO (Mockup) -->
-    <section id="portafolio" class="py-24 bg-slate-900/50">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-12 reveal">
+    <section id="portafolio" class="py-32 bg-[#000000]/20 border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
                 <div>
-                    <h2 class="text-3xl md:text-5xl font-bold text-white mb-2">Trabajos Recientes</h2>
-                    <p class="text-slate-400">Una muestra de nuestra calidad.</p>
+                    <span class="text-brand-cyan font-bold tracking-widest text-sm uppercase">Selected Works</span>
+                    <h2 class="text-4xl font-bold text-white mt-2">Nuestras Creaciones</h2>
                 </div>
-                <a href="#contacto" class="text-brand-cyan font-bold hover:underline mt-4 md:mt-0">Ver todos los proyectos <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                <a href="#" class="group text-white text-sm font-bold border-b border-brand-cyan pb-1 mt-4 md:mt-0 interactable">
+                    Ver repositorio completo 
+                    <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                </a>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Proyecto 1 -->
-                <div class="reveal project-card h-64 bg-slate-800 relative group cursor-pointer border border-slate-700">
-                    <div class="absolute inset-0 flex items-center justify-center text-slate-600 text-6xl group-hover:scale-110 transition-transform duration-500">
-                        <i class="fa-solid fa-store"></i>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="group relative rounded-2xl overflow-hidden aspect-[4/3] cursor-pointer interactable border border-white/10 reveal">
+                    <div class="absolute inset-0 bg-slate-800 transition-transform duration-700 group-hover:scale-110 flex items-center justify-center">
+                         <i class="fa-solid fa-chart-line text-6xl text-slate-700"></i>
                     </div>
-                    <div class="absolute inset-0 project-overlay p-6 flex flex-col justify-end">
-                        <h4 class="text-xl font-bold text-white">E-Commerce Tech</h4>
-                        <p class="text-brand-cyan text-sm">Desarrollo Web</p>
-                    </div>
-                </div>
-
-                <!-- Proyecto 2 -->
-                <div class="reveal project-card h-64 bg-slate-800 relative group cursor-pointer border border-slate-700">
-                    <div class="absolute inset-0 flex items-center justify-center text-slate-600 text-6xl group-hover:scale-110 transition-transform duration-500">
-                        <i class="fa-solid fa-headphones-simple"></i>
-                    </div>
-                    <div class="absolute inset-0 project-overlay p-6 flex flex-col justify-end">
-                        <h4 class="text-xl font-bold text-white">Spot Radiofónico</h4>
-                        <p class="text-brand-purple text-sm">Locución & Edición</p>
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
+                        <span class="text-brand-cyan text-xs font-bold tracking-widest uppercase mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Fintech</span>
+                        <h3 class="text-2xl font-bold text-white mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">Crypto Dashboard</h3>
+                        <p class="text-slate-400 text-sm translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">Diseño de interfaz y desarrollo frontend para plataforma de trading.</p>
                     </div>
                 </div>
 
-                <!-- Proyecto 3 -->
-                <div class="reveal project-card h-64 bg-slate-800 relative group cursor-pointer border border-slate-700">
-                    <div class="absolute inset-0 flex items-center justify-center text-slate-600 text-6xl group-hover:scale-110 transition-transform duration-500">
-                        <i class="fa-solid fa-vector-square"></i>
+                <div class="group relative rounded-2xl overflow-hidden aspect-[4/3] cursor-pointer interactable border border-white/10 reveal" style="transition-delay: 100ms;">
+                    <div class="absolute inset-0 bg-slate-800 transition-transform duration-700 group-hover:scale-110 flex items-center justify-center">
+                        <i class="fa-solid fa-gamepad text-6xl text-slate-700"></i>
                     </div>
-                    <div class="absolute inset-0 project-overlay p-6 flex flex-col justify-end">
-                        <h4 class="text-xl font-bold text-white">Rebranding Total</h4>
-                        <p class="text-brand-blue text-sm">Diseño Gráfico</p>
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
+                        <span class="text-brand-purple text-xs font-bold tracking-widest uppercase mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Gaming</span>
+                        <h3 class="text-2xl font-bold text-white mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">Neon City Hub</h3>
+                        <p class="text-slate-400 text-sm translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">Sitio web inmersivo para lanzamiento de videojuego indie.</p>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- NUEVA SECCIÓN: TESTIMONIOS -->
-    <section class="py-20 relative overflow-hidden">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <i class="fa-solid fa-quote-left text-4xl text-brand-cyan/30 mb-6"></i>
-            <h2 class="reveal text-2xl md:text-4xl font-bold text-white mb-8 italic leading-relaxed">
-                "Dinobot Company transformó la imagen de mi negocio. La página web es increíblemente rápida y el diseño del logo captó exactamente lo que quería. Profesionales al 100%."
-            </h2>
-            <div class="reveal flex items-center justify-center gap-4">
-                <div class="w-12 h-12 rounded-full bg-slate-700 border-2 border-brand-cyan overflow-hidden">
-                    <i class="fa-solid fa-user text-white p-2"></i> <!-- Placeholder avatar -->
-                </div>
-                <div class="text-left">
-                    <p class="text-white font-bold">Carlos Mendoza</p>
-                    <p class="text-slate-500 text-sm">CEO, StartUp México</p>
+                <div class="group relative rounded-2xl overflow-hidden aspect-[4/3] cursor-pointer interactable border border-white/10 reveal" style="transition-delay: 200ms;">
+                    <div class="absolute inset-0 bg-slate-800 transition-transform duration-700 group-hover:scale-110 flex items-center justify-center">
+                        <i class="fa-solid fa-bag-shopping text-6xl text-slate-700"></i>
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
+                        <span class="text-brand-blue text-xs font-bold tracking-widest uppercase mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">E-Commerce</span>
+                        <h3 class="text-2xl font-bold text-white mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">Moda Urbana</h3>
+                        <p class="text-slate-400 text-sm translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">Tienda online completa con pasarela de pagos integrada.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER EXPANDIDO CON REDES -->
-    <footer id="contacto" class="bg-black pt-20 pb-10 border-t border-slate-800 relative overflow-hidden">
-        <!-- Efecto de fondo sutil -->
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-cyan/5 via-transparent to-transparent"></div>
-
-        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16 relative z-10">
-            <!-- Columna 1: Marca -->
-            <div class="lg:col-span-2">
-                <div class="flex items-center gap-3 mb-6">
-                    <i class="fa-solid fa-dragon text-4xl text-brand-cyan"></i>
-                    <div>
-                        <h3 class="text-2xl font-black text-white tracking-wider">DINOBOT</h3>
-                        <p class="text-xs text-slate-500 tracking-[0.4em] uppercase">Company</p>
-                    </div>
-                </div>
-                <p class="text-slate-500 mb-8 max-w-sm">
-                    Llevamos tu presencia digital al siguiente nivel. Tecnología, creatividad y estrategia unidas en un solo lugar.
+    <footer id="contacto" class="bg-[#020617] pt-24 pb-12 border-t border-white/10 relative">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12 mb-16">
+            <div class="md:col-span-2">
+                <a href="#" class="flex items-center gap-2 mb-6">
+                    <i class="fa-solid fa-dragon text-3xl text-brand-cyan"></i>
+                    <span class="font-bold text-2xl text-white">DINOBOT</span>
+                </a>
+                <p class="text-slate-500 max-w-sm mb-8">
+                    Elevando estándares digitales. Creamos experiencias que fusionan arte y tecnología para marcas que se atreven a innovar.
                 </p>
-                
-                <!-- REDES SOCIALES (LAS 6 SOLICITADAS) -->
-                <div class="flex flex-wrap gap-4">
-                    <!-- Reddit (Naranja) -->
-                    <a href="#" target="_blank" class="social-icon w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center text-slate-400 hover:text-[#FF4500] hover:bg-[#FF4500]/10 border border-slate-800 hover:border-[#FF4500]/50">
-                        <i class="fa-brands fa-reddit-alien text-xl"></i>
-                    </a>
-                    <!-- GitHub (Blanco/Negro) -->
-                    <a href="#" target="_blank" class="social-icon w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 border border-slate-800 hover:border-white/50">
-                        <i class="fa-brands fa-github text-xl"></i>
-                    </a>
-                    <!-- Discord (Azul Indigo) -->
-                    <a href="#" target="_blank" class="social-icon w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center text-slate-400 hover:text-[#5865F2] hover:bg-[#5865F2]/10 border border-slate-800 hover:border-[#5865F2]/50">
-                        <i class="fa-brands fa-discord text-xl"></i>
-                    </a>
-                    <!-- Facebook (Azul) -->
-                    <a href="https://facebook.com/erikmexa06" target="_blank" class="social-icon w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center text-slate-400 hover:text-[#1877F2] hover:bg-[#1877F2]/10 border border-slate-800 hover:border-[#1877F2]/50">
-                        <i class="fa-brands fa-facebook-f text-xl"></i>
-                    </a>
-                    <!-- Twitter/X (Negro/Blanco) -->
-                    <a href="https://twitter.com/erik_1945" target="_blank" class="social-icon w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center text-slate-400 hover:text-white hover:bg-black border border-slate-800 hover:border-white/50">
-                        <i class="fa-brands fa-x-twitter text-xl"></i>
-                    </a>
-                    <!-- Instagram (Gradiente) -->
-                    <a href="https://instagram.com/erikmexa06" target="_blank" class="social-icon w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center text-slate-400 hover:text-[#E1306C] hover:bg-[#E1306C]/10 border border-slate-800 hover:border-[#E1306C]/50">
-                        <i class="fa-brands fa-instagram text-xl"></i>
-                    </a>
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center text-slate-400 hover:text-white hover:bg-brand-cyan hover:scale-110 transition-all interactable"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center text-slate-400 hover:text-white hover:bg-brand-blue hover:scale-110 transition-all interactable"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center text-slate-400 hover:text-white hover:bg-brand-purple hover:scale-110 transition-all interactable"><i class="fa-brands fa-instagram"></i></a>
                 </div>
             </div>
 
-            <!-- Columna 2: Links -->
             <div>
-                <h4 class="text-white font-bold mb-6">Explorar</h4>
-                <ul class="space-y-3 text-slate-400 text-sm">
-                    <li><a href="#inicio" class="hover:text-brand-cyan transition-colors">Inicio</a></li>
-                    <li><a href="#servicios" class="hover:text-brand-cyan transition-colors">Servicios</a></li>
-                    <li><a href="#proceso" class="hover:text-brand-cyan transition-colors">Proceso de Trabajo</a></li>
-                    <li><a href="#portafolio" class="hover:text-brand-cyan transition-colors">Portafolio</a></li>
+                <h4 class="text-white font-bold mb-6">Contacto Directo</h4>
+                <ul class="space-y-4 text-slate-400">
+                    <li class="flex items-center gap-3">
+                        <i class="fa-brands fa-whatsapp text-brand-cyan"></i>
+                        <span>+52 56 45 20 09 67</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fa-regular fa-envelope text-brand-cyan"></i>
+                        <span>coronelefa113@gmail.com</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fa-solid fa-location-dot text-brand-cyan"></i>
+                        <span>Ciudad de México</span>
+                    </li>
                 </ul>
             </div>
-
-            <!-- Columna 3: Contacto -->
-            <div>
-                <h4 class="text-white font-bold mb-6">Contáctanos</h4>
-                <ul class="space-y-4 text-slate-400 text-sm">
-                    <li class="flex items-start gap-3">
-                        <i class="fa-brands fa-whatsapp text-green-500 mt-1 text-lg"></i>
-                        <span>
-                            <span class="block text-white font-medium">WhatsApp</span>
-                            +52 56 45 20 09 67
-                        </span>
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <i class="fa-regular fa-envelope text-brand-cyan mt-1 text-lg"></i>
-                        <span>
-                            <span class="block text-white font-medium">Correo</span>
-                            coronelefa113@gmail.com
-                        </span>
-                    </li>
+             <div>
+                <h4 class="text-white font-bold mb-6">Legal</h4>
+                <ul class="space-y-2 text-slate-400 text-sm">
+                    <li><a href="#" class="hover:text-brand-cyan transition-colors">Política de Privacidad</a></li>
+                    <li><a href="#" class="hover:text-brand-cyan transition-colors">Términos de Servicio</a></li>
                 </ul>
             </div>
         </div>
-
-        <div class="border-t border-slate-900 pt-8 text-center">
-            <p class="text-slate-600 text-xs">
-                &copy; 2025 Dinobot Company. Todos los derechos reservados. <br class="md:hidden">
-                Diseñado para el futuro.
-            </p>
+        <div class="text-center border-t border-white/5 pt-8">
+            <p class="text-slate-600 text-sm">© 2025 Dinobot Company. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- WHATSAPP FLOTANTE -->
-    <a href="https://wa.me/525645200967?text=Hola,%20me%20interesa%20un%20proyecto" target="_blank" 
-       class="fixed bottom-6 right-6 z-40 group">
-        <span class="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping"></span>
-        <div class="relative bg-green-500 w-16 h-16 rounded-full flex items-center justify-center text-white text-3xl shadow-xl group-hover:bg-green-400 transition-all duration-300 animate-float-fast">
+    <a href="https://wa.me/525645200967" target="_blank" class="fixed bottom-8 right-8 z-50 group interactable">
+        <span class="absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-20 animate-ping"></span>
+        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center text-white text-3xl shadow-[0_0_20px_rgba(34,197,94,0.4)] group-hover:scale-110 transition-transform">
             <i class="fa-brands fa-whatsapp"></i>
         </div>
     </a>
 
-    <!-- LÓGICA JAVASCRIPT -->
     <script>
-        // Menú Móvil
+        // 1. Lógica del Menú Móvil
         function toggleMenu() {
             const menu = document.getElementById('mobileMenu');
-            const icon = document.getElementById('menuIcon');
             menu.classList.toggle('hidden');
-            if(menu.classList.contains('hidden')) {
-                icon.classList.remove('fa-xmark');
-                icon.classList.add('fa-bars');
-            } else {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-xmark');
-            }
         }
 
-        // Scroll Reveal
+        // 2. Scroll Reveal (Aparición suave)
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
                 }
             });
         }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
-        // Navbar Scroll
+        document.querySelectorAll('.reveal').forEach((el) => {
+            el.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-700', 'ease-out');
+            observer.observe(el);
+        });
+
+        // 3. Navbar Blur al scrollear
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
-            if(window.scrollY > 50) nav.classList.add('scrolled');
-            else nav.classList.remove('scrolled');
+            if(window.scrollY > 50) {
+                nav.classList.add('border-b', 'border-white/10', 'bg-[#020617]/90');
+            } else {
+                nav.classList.remove('border-b', 'border-white/10', 'bg-[#020617]/90');
+            }
+        });
+
+        // 4. Cursor Personalizado
+        const cursor = document.getElementById('custom-cursor');
+        const interactables = document.querySelectorAll('.interactable');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        interactables.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+        });
+
+        // 5. Efecto Tilt 3D (Sin librerías externas pesadas)
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = ((y - centerY) / centerY) * -10; // Max rotación 10deg
+                const rotateY = ((x - centerX) / centerX) * 10;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+            });
         });
     </script>
 </body>
