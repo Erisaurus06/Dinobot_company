@@ -1,48 +1,29 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
-<head>
+<html lang="es" class="dark scroll-smooth"> <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Dinobot Company: Agencia de Desarrollo Web y Diseño Digital de alto impacto.">
-    <title>DINOBOT COMPANY | Soluciones Digitales</title>
+    <title>DINOBOT | Creator Experience</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
+            darkMode: 'class', // Importante para el switch
             theme: {
                 extend: {
-                    fontFamily: { sans: ['Space Grotesk', 'sans-serif'] },
+                    fontFamily: { 
+                        sans: ['"Segoe UI"', 'sans-serif'], // Fuente tipo Microsoft/Xbox
+                        display: ['"Space Grotesk"', 'sans-serif']
+                    },
                     colors: {
                         brand: {
-                            dark: '#020617', // Slate 950
-                            cyan: '#22d3ee', // Cyan 400
-                            blue: '#3b82f6',
-                            purple: '#a855f7',
-                            accent: '#f472b6' 
-                        }
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'blob': 'blob 7s infinite',
-                        'glow': 'glow 2s ease-in-out infinite alternate',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        },
-                        blob: {
-                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
-                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
-                        },
-                        glow: {
-                            'from': { boxShadow: '0 0 10px -10px rgba(34, 211, 238, 0)' },
-                            'to': { boxShadow: '0 0 20px 5px rgba(34, 211, 238, 0.3)' }
+                            green: '#107C10', // Verde Xbox Clásico (Referencia)
+                            cyan: '#00f0ff',  // Tu Cian Dinobot
+                            purple: '#bd00ff', // Tu Morado Dinobot
+                            dark: '#111111',
+                            light: '#f2f2f2'
                         }
                     }
                 }
@@ -51,512 +32,255 @@
     </script>
 
     <style>
-        /* Cursor Personalizado */
+        /* Estilos Base Xbox-like */
         body {
-            cursor: none;
-            background-color: #020617;
-            overflow-x: hidden;
+            transition: background-color 0.3s, color 0.3s;
         }
         
-        #custom-cursor {
-            width: 20px;
-            height: 20px;
-            border: 2px solid #22d3ee;
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: width 0.3s, height 0.3s, background-color 0.3s;
-            mix-blend-mode: difference;
+        /* Efecto de Foco en Tarjetas (Hover Glow) */
+        .xbox-card {
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-        #custom-cursor.hovered {
-            width: 50px;
-            height: 50px;
-            background-color: rgba(34, 211, 238, 0.2);
-            border-color: transparent;
+        .xbox-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            outline: 4px solid #22d3ee; /* Borde Cian al seleccionar */
+            z-index: 10;
         }
 
-        /* Fondo Animado de Rejilla */
-        .cyber-grid {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background-image: linear-gradient(rgba(34, 211, 238, 0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(34, 211, 238, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: -1;
-            transform: perspective(500px) rotateX(60deg) translateY(-100px) scale(2);
-            animation: gridMove 20s linear infinite;
-            mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
+        /* Imágenes */
+        .img-cover { width: 100%; height: 100%; object-fit: cover; }
+        
+        /* Redes Sociales Animadas */
+        .social-btn {
+            position: relative; overflow: hidden;
+            transition: all 0.3s;
         }
-
-        @keyframes gridMove {
-            0% { transform: perspective(500px) rotateX(60deg) translateY(0) scale(2); }
-            100% { transform: perspective(500px) rotateX(60deg) translateY(50px) scale(2); }
+        .social-btn::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: currentColor; opacity: 0.1; transform: scale(0);
+            transition: transform 0.3s; border-radius: 50%;
         }
+        .social-btn:hover::before { transform: scale(1.5); }
+        .social-btn:hover { transform: translateY(-5px); }
 
-        /* Glassmorphism Ultra */
-        .glass-card {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.6) 100%);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.1s ease-out;
-            transform-style: preserve-3d;
-        }
-
-        /* Efectos de Texto */
-        .text-gradient-main {
-            background: linear-gradient(to right, #22d3ee, #e879f9, #22d3ee);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shine 3s linear infinite;
-        }
-
-        @keyframes shine {
-            to { background-position: 200% center; }
-        }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #020617; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #22d3ee; }
     </style>
 </head>
-<body class="text-slate-300 antialiased selection:bg-brand-cyan selection:text-black">
+<body class="bg-brand-light text-slate-900 dark:bg-[#111111] dark:text-white">
 
-    <div id="custom-cursor" class="hidden md:block"></div>
-
-    <div class="cyber-grid"></div>
-    <div class="fixed top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-[#020617]/50 to-[#020617] -z-1 pointer-events-none"></div>
-
-    <nav class="fixed top-0 w-full z-50 transition-all duration-300 border-b border-transparent" id="navbar">
-        <div class="absolute inset-0 bg-[#020617]/80 backdrop-blur-md -z-10"></div>
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <a href="#" class="flex items-center gap-3 group interactable">
-                    <div class="relative w-10 h-10 flex items-center justify-center bg-brand-cyan/10 rounded-lg border border-brand-cyan/30 overflow-hidden group-hover:border-brand-cyan transition-colors">
-                        <i class="fa-solid fa-dragon text-xl text-brand-cyan relative z-10"></i>
-                        <div class="absolute inset-0 bg-brand-cyan/20 blur-md group-hover:bg-brand-cyan/40 transition-all"></div>
+    <nav class="fixed w-full z-50 backdrop-blur-md bg-white/80 dark:bg-[#111111]/90 border-b border-gray-200 dark:border-white/10 transition-colors duration-300">
+        <div class="max-w-[1600px] mx-auto px-6 h-20 flex items-center justify-between">
+            
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 relative">
+                    <img src="logo.png" alt="Dinobot Logo" class="w-full h-full object-contain" 
+                         onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='flex'">
+                    
+                    <div id="fallback-logo" class="hidden w-full h-full items-center justify-center bg-brand-cyan text-black font-bold rounded">
+                        <i class="fa-solid fa-dragon"></i>
                     </div>
-                    <div class="flex flex-col">
-                        <span class="font-bold text-xl text-white tracking-wide leading-none">DINOBOT</span>
-                        <span class="text-[10px] font-medium text-brand-cyan tracking-[0.4em] uppercase leading-none opacity-80">Studios</span>
-                    </div>
-                </a>
-
-                <div class="hidden lg:flex items-center gap-8">
-                    <a href="#inicio" class="text-sm font-medium hover:text-brand-cyan transition-colors interactable">Inicio</a>
-                    <a href="#servicios" class="text-sm font-medium hover:text-brand-cyan transition-colors interactable">Servicios</a>
-                    <a href="#portafolio" class="text-sm font-medium hover:text-brand-cyan transition-colors interactable">Portafolio</a>
-                    <a href="#blog" class="text-sm font-medium hover:text-brand-cyan transition-colors interactable">Blog</a>
-                    <a href="#contacto" class="px-6 py-2.5 bg-white text-black font-bold rounded-full text-sm hover:bg-brand-cyan transition-all transform hover:scale-105 shadow-[0_0_15px_rgba(255,255,255,0.3)] interactable">
-                        Iniciar Proyecto
-                    </a>
                 </div>
+                <span class="font-display font-bold text-xl tracking-tight">DINOBOT</span>
+            </a>
 
-                <button onclick="toggleMenu()" class="lg:hidden text-white text-2xl interactable">
-                    <i id="menuIcon" class="fa-solid fa-bars"></i>
+            <div class="hidden md:flex items-center gap-8 font-semibold text-sm uppercase tracking-wide">
+                <a href="#inicio" class="hover:text-brand-cyan transition-colors">Inicio</a>
+                <a href="#portafolio" class="hover:text-brand-cyan transition-colors">Juegos & Web</a>
+                <a href="#servicios" class="hover:text-brand-cyan transition-colors">Servicios</a>
+                <a href="#contacto" class="hover:text-brand-cyan transition-colors">Contacto</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <button onclick="toggleTheme()" class="w-10 h-10 rounded-full bg-gray-200 dark:bg-white/10 flex items-center justify-center hover:bg-brand-cyan hover:text-black transition-all">
+                    <i class="fa-solid fa-moon dark:hidden"></i> <i class="fa-solid fa-sun hidden dark:block"></i>  </button>
+
+                <button class="md:hidden text-2xl" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                    <i class="fa-solid fa-bars"></i>
                 </button>
             </div>
         </div>
 
-        <div id="mobileMenu" class="hidden lg:hidden bg-[#020617] border-b border-white/10 absolute w-full backdrop-blur-xl">
-            <div class="px-6 py-8 space-y-6">
-                <a href="#inicio" onclick="toggleMenu()" class="block text-xl text-white font-medium">Inicio</a>
-                <a href="#servicios" onclick="toggleMenu()" class="block text-xl text-white font-medium">Servicios</a>
-                <a href="#portafolio" onclick="toggleMenu()" class="block text-xl text-white font-medium">Portafolio</a>
-                <a href="#blog" onclick="toggleMenu()" class="block text-xl text-white font-medium">Blog</a>
-                <a href="#contacto" onclick="toggleMenu()" class="block text-center bg-brand-cyan text-black font-bold py-3 rounded-xl mt-4">Contactar</a>
-            </div>
+        <div id="mobile-menu" class="hidden bg-white dark:bg-[#111111] border-b border-gray-200 dark:border-white/10 p-4 absolute w-full md:hidden">
+            <a href="#inicio" class="block py-3 font-bold border-b border-gray-100 dark:border-white/5">INICIO</a>
+            <a href="#portafolio" class="block py-3 font-bold border-b border-gray-100 dark:border-white/5">PROYECTOS</a>
+            <a href="#contacto" class="block py-3 font-bold text-brand-cyan">CONTACTO</a>
         </div>
     </nav>
 
-    <section id="inicio" class="relative min-h-screen flex items-center pt-20 overflow-hidden">
-        <div class="absolute top-20 left-1/4 w-72 h-72 bg-brand-purple/20 rounded-full mix-blend-screen filter blur-[100px] animate-blob"></div>
-        <div class="absolute top-20 right-1/4 w-72 h-72 bg-brand-cyan/20 rounded-full mix-blend-screen filter blur-[100px] animate-blob animation-delay-2000"></div>
-        <div class="absolute -bottom-32 left-1/3 w-72 h-72 bg-brand-blue/20 rounded-full mix-blend-screen filter blur-[100px] animate-blob animation-delay-4000"></div>
-
-        <div class="max-w-7xl mx-auto px-6 relative z-10 w-full">
-            <div class="flex flex-col lg:flex-row items-center gap-16">
-                <div class="lg:w-1/2 text-center lg:text-left">
-                    <div class="reveal inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand-cyan/30 bg-brand-cyan/5 text-brand-cyan text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-sm">
-                        <span class="w-2 h-2 rounded-full bg-brand-cyan animate-pulse"></span>
-                        Disponible para trabajar
-                    </div>
-                    
-                    <h1 class="reveal text-5xl md:text-7xl lg:text-8xl font-black text-white mb-6 leading-[0.9]">
-                        FORJAMOS <br>
-                        <span class="text-gradient-main">EL FUTURO</span>
-                        <br>DIGITAL
-                    </h1>
-                    
-                    <p class="reveal text-lg text-slate-400 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                        Dinobot combina diseño de vanguardia con código robusto. Transformamos ideas complejas en experiencias digitales fluidas y memorables.
-                    </p>
-                    
-                    <div class="reveal flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                        <a href="#portafolio" class="group relative px-8 py-4 bg-brand-cyan text-black font-bold rounded-xl overflow-hidden interactable">
-                            <span class="relative z-10 group-hover:text-white transition-colors duration-300">Ver Proyectos</span>
-                            <div class="absolute inset-0 bg-black scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 ease-out"></div>
-                        </a>
-                        <a href="#contacto" class="px-8 py-4 border border-white/20 text-white font-bold rounded-xl hover:bg-white/5 hover:border-brand-cyan transition-all interactable">
-                            Hablemos
-                        </a>
-                    </div>
-                </div>
-
-                <div class="lg:w-1/2 relative reveal" style="transition-delay: 200ms;">
-                    <div class="relative w-full aspect-square max-w-[500px] mx-auto animate-float">
-                        <div class="absolute inset-0 border border-brand-cyan/20 rounded-full animate-[spin_10s_linear_infinite]"></div>
-                        <div class="absolute inset-4 border border-brand-purple/20 rounded-full animate-[spin_15s_linear_infinite_reverse]"></div>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                             <div class="w-64 h-64 bg-gradient-to-tr from-brand-dark to-slate-800 rounded-3xl rotate-12 flex items-center justify-center border border-white/10 shadow-2xl shadow-brand-cyan/20 backdrop-blur-xl tilt-element">
-                                <i class="fa-solid fa-code text-8xl text-transparent bg-clip-text bg-gradient-to-br from-brand-cyan to-brand-purple"></i>
-                             </div>
-                             <div class="absolute w-64 h-64 bg-black/50 rounded-3xl -rotate-6 -z-10 border border-white/5 tilt-element"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <header id="inicio" class="relative pt-20 h-screen min-h-[600px] flex items-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop" 
+                 alt="Background Tech" class="w-full h-full object-cover opacity-20 dark:opacity-40">
+            <div class="absolute inset-0 bg-gradient-to-r from-white via-white/50 to-transparent dark:from-[#111111] dark:via-[#111111]/80 dark:to-transparent"></div>
         </div>
-    </section>
 
-    <section id="servicios" class="py-32 relative">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="mb-20 text-center reveal">
-                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">Ecosistema de Servicios</h2>
-                <p class="text-slate-400 max-w-2xl mx-auto">Soluciones integrales diseñadas para escalar tu negocio en el entorno digital.</p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="tilt-card glass-card p-1 rounded-3xl relative group interactable">
-                    <div class="absolute inset-0 bg-gradient-to-r from-brand-cyan to-brand-blue rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500"></div>
-                    <div class="bg-[#0f172a]/90 backdrop-blur-xl h-full p-8 rounded-[22px] relative z-10 flex flex-col items-start border border-white/5">
-                        <div class="w-14 h-14 bg-brand-cyan/10 rounded-xl flex items-center justify-center text-brand-cyan text-2xl mb-6 group-hover:scale-110 group-hover:bg-brand-cyan group-hover:text-black transition-all duration-300">
-                            <i class="fa-solid fa-laptop-code"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold text-white mb-3">Desarrollo Web</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-6">Sitios ultra rápidos, e-commerce escalables y aplicaciones web progresivas (PWA) construidas con código limpio.</p>
-                        <ul class="text-xs text-slate-500 space-y-2 mt-auto">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-cyan"></i> Landing Pages</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-cyan"></i> Dashboards</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="tilt-card glass-card p-1 rounded-3xl relative group interactable">
-                    <div class="absolute inset-0 bg-gradient-to-r from-brand-purple to-brand-accent rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500"></div>
-                    <div class="bg-[#0f172a]/90 backdrop-blur-xl h-full p-8 rounded-[22px] relative z-10 flex flex-col items-start border border-white/5">
-                        <div class="w-14 h-14 bg-brand-purple/10 rounded-xl flex items-center justify-center text-brand-purple text-2xl mb-6 group-hover:scale-110 group-hover:bg-brand-purple group-hover:text-white transition-all duration-300">
-                            <i class="fa-solid fa-microphone-lines"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold text-white mb-3">Locución Pro</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-6">Dale voz a tu marca. Grabación en estudio profesional para spots, videos corporativos y doblaje.</p>
-                        <ul class="text-xs text-slate-500 space-y-2 mt-auto">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-purple"></i> Edición de Audio</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-purple"></i> Masterización</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="tilt-card glass-card p-1 rounded-3xl relative group interactable">
-                    <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500"></div>
-                    <div class="bg-[#0f172a]/90 backdrop-blur-xl h-full p-8 rounded-[22px] relative z-10 flex flex-col items-start border border-white/5">
-                        <div class="w-14 h-14 bg-brand-blue/10 rounded-xl flex items-center justify-center text-brand-blue text-2xl mb-6 group-hover:scale-110 group-hover:bg-brand-blue group-hover:text-white transition-all duration-300">
-                            <i class="fa-solid fa-pen-nib"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold text-white mb-3">Diseño UI/UX</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-6">Interfaces hermosas y funcionales. Diseñamos pensando en la experiencia del usuario final.</p>
-                        <ul class="text-xs text-slate-500 space-y-2 mt-auto">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-blue"></i> Prototipado</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-blue"></i> Branding</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="portafolio" class="py-32 bg-[#000000]/20 border-y border-white/5">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
-                <div>
-                    <span class="text-brand-cyan font-bold tracking-widest text-sm uppercase">Selected Works</span>
-                    <h2 class="text-4xl font-bold text-white mt-2">Nuestras Creaciones</h2>
-                </div>
-                <a href="#" class="group text-white text-sm font-bold border-b border-brand-cyan pb-1 mt-4 md:mt-0 interactable">
-                    Ver todos
-                    <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
-                </a>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <a href="https://www.panaderiajurassic.com.mx" target="_blank" class="group relative rounded-2xl overflow-hidden aspect-[4/3] cursor-pointer interactable border border-white/10 reveal block">
-                    <div class="absolute inset-0 bg-slate-800 transition-transform duration-700 group-hover:scale-110 flex items-center justify-center">
-                         <i class="fa-solid fa-bread-slice text-6xl text-slate-700 group-hover:text-brand-cyan/50 transition-colors"></i>
-                    </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                        <span class="text-brand-cyan text-xs font-bold tracking-widest uppercase mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Web Corporativa</span>
-                        <h3 class="text-2xl font-bold text-white mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">Panadería Jurassic</h3>
-                        <p class="text-slate-400 text-sm translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">Sitio oficial con catálogo de productos y temática única.</p>
-                        <span class="text-brand-cyan text-xs mt-4 font-bold">Visitar Sitio <i class="fa-solid fa-external-link-alt ml-1"></i></span>
-                    </div>
-                </a>
-
-                <a href="https://www.canva.com/design/DAFvgcGvL3U/7rMpTR9j4pf3v-xx1ZBcTQ/edit?utm_content=DAFvgcGvL3U&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" target="_blank" class="group relative rounded-2xl overflow-hidden aspect-[4/3] cursor-pointer interactable border border-white/10 reveal block" style="transition-delay: 100ms;">
-                    <div class="absolute inset-0 bg-slate-800 transition-transform duration-700 group-hover:scale-110 flex items-center justify-center">
-                        <i class="fa-solid fa-paintbrush text-6xl text-slate-700 group-hover:text-brand-purple/50 transition-colors"></i>
-                    </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                        <span class="text-brand-purple text-xs font-bold tracking-widest uppercase mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Diseño Visual</span>
-                        <h3 class="text-2xl font-bold text-white mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">Identidad Gráfica</h3>
-                        <p class="text-slate-400 text-sm translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">Portafolio creativo y diseño de assets digitales en Canva.</p>
-                        <span class="text-brand-purple text-xs mt-4 font-bold">Ver Diseño <i class="fa-solid fa-external-link-alt ml-1"></i></span>
-                    </div>
-                </a>
-
-                <a href="#" class="group relative rounded-2xl overflow-hidden aspect-[4/3] cursor-pointer interactable border border-white/10 reveal block" style="transition-delay: 200ms;">
-                    <div class="absolute inset-0 bg-slate-800 transition-transform duration-700 group-hover:scale-110 flex items-center justify-center">
-                        <i class="fa-solid fa-clone text-6xl text-slate-700 group-hover:text-brand-blue/50 transition-colors"></i>
-                    </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                        <span class="text-brand-blue text-xs font-bold tracking-widest uppercase mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Práctica Técnica</span>
-                        <h3 class="text-2xl font-bold text-white mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">Proyecto de Imitación</h3>
-                        <p class="text-slate-400 text-sm translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">Réplica exacta de interfaz de usuario de alto nivel. (Enlace pendiente).</p>
-                        <span class="text-brand-blue text-xs mt-4 font-bold">Próximamente...</span>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-32 relative overflow-hidden border-b border-white/5 bg-[#020617]">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-purple/10 via-transparent to-transparent"></div>
-        
-        <div class="max-w-5xl mx-auto px-6 text-center relative z-10 reveal">
-            <div class="mb-8 inline-block relative">
-                <i class="fa-solid fa-terminal text-5xl text-brand-cyan opacity-50"></i>
-                <div class="absolute -inset-4 bg-brand-cyan/20 blur-xl rounded-full -z-10"></div>
-            </div>
-
-            <h2 class="text-3xl md:text-5xl font-bold text-white mb-10 leading-tight font-sans">
-                "En un mundo lleno de ruido digital, <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan to-brand-purple">la claridad es poder</span>. No solo escribimos código; forjamos la infraestructura del futuro para quienes se atreven a innovar."
-            </h2>
-
-            <div class="flex items-center justify-center gap-5 mt-12">
-                <div class="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-brand-cyan via-white to-brand-purple">
-                    <div class="w-full h-full rounded-full bg-slate-900 flex items-center justify-center overflow-hidden">
-                        <i class="fa-solid fa-user-astronaut text-2xl text-white"></i>
-                    </div>
-                </div>
-                
-                <div class="text-left">
-                    <p class="text-white font-bold text-xl tracking-wide">Erik</p>
-                    <p class="text-brand-cyan text-xs font-bold tracking-[0.2em] uppercase">CEO & Founder</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="blog" class="py-32 relative bg-[#020617]">
-        <div class="absolute right-0 top-1/4 w-96 h-96 bg-brand-cyan/10 rounded-full blur-[120px] pointer-events-none"></div>
-
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
-                <div>
-                    <span class="text-brand-purple font-bold tracking-widest text-sm uppercase"><i class="fa-solid fa-bolt mr-2"></i>Dinobot Insights</span>
-                    <h2 class="text-4xl md:text-5xl font-bold text-white mt-3">Bitácora Digital</h2>
-                </div>
-                <a href="#" class="hidden md:inline-flex items-center gap-2 text-slate-400 hover:text-brand-cyan transition-colors font-medium interactable">
-                    Ver todos los artículos <i class="fa-solid fa-arrow-right-long"></i>
-                </a>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8 mb-24">
-                <article class="group relative bg-slate-900/50 border border-white/5 rounded-2xl overflow-hidden hover:border-brand-cyan/50 transition-all duration-300 interactable reveal">
-                    <div class="h-48 w-full bg-slate-800 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-tr from-brand-cyan/20 to-brand-blue/20 group-hover:scale-110 transition-transform duration-700"></div>
-                        <i class="fa-brands fa-react absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-6xl text-white/10 group-hover:text-brand-cyan/50 transition-colors duration-500"></i>
-                        <div class="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-lg border border-white/10">
-                            <span class="text-xs font-bold text-brand-cyan uppercase">Desarrollo</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center gap-4 text-xs text-slate-500 mb-4">
-                            <span><i class="fa-regular fa-calendar mr-1"></i> 02 Dic, 2025</span>
-                            <span><i class="fa-regular fa-clock mr-1"></i> 5 min</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-brand-cyan transition-colors">Optimización Extrema Web</h3>
-                        <p class="text-slate-400 text-sm line-clamp-3 mb-6">Descubre las nuevas tecnologías de renderizado para cargar sitios en menos de 0.5 segundos.</p>
-                        <a href="#" class="inline-flex items-center text-sm font-bold text-white hover:text-brand-cyan transition-colors">Leer Artículo <i class="fa-solid fa-chevron-right ml-2 text-xs"></i></a>
-                    </div>
-                </article>
-
-                <article class="group relative bg-slate-900/50 border border-white/5 rounded-2xl overflow-hidden hover:border-brand-purple/50 transition-all duration-300 interactable reveal" style="transition-delay: 100ms;">
-                    <div class="h-48 w-full bg-slate-800 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-tr from-brand-purple/20 to-pink-500/20 group-hover:scale-110 transition-transform duration-700"></div>
-                        <i class="fa-solid fa-wand-magic-sparkles absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-6xl text-white/10 group-hover:text-brand-purple/50 transition-colors duration-500"></i>
-                        <div class="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-lg border border-white/10">
-                            <span class="text-xs font-bold text-brand-purple uppercase">Diseño IA</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center gap-4 text-xs text-slate-500 mb-4">
-                            <span><i class="fa-regular fa-calendar mr-1"></i> 28 Nov, 2025</span>
-                            <span><i class="fa-regular fa-clock mr-1"></i> 3 min</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-brand-purple transition-colors">IA y el Diseño Futuro</h3>
-                        <p class="text-slate-400 text-sm line-clamp-3 mb-6">Analizamos cómo herramientas como Midjourney potencian nuestra creatividad en lugar de reemplazarla.</p>
-                        <a href="#" class="inline-flex items-center text-sm font-bold text-white hover:text-brand-purple transition-colors">Leer Artículo <i class="fa-solid fa-chevron-right ml-2 text-xs"></i></a>
-                    </div>
-                </article>
-
-                <article class="group relative bg-slate-900/50 border border-white/5 rounded-2xl overflow-hidden hover:border-brand-blue/50 transition-all duration-300 interactable reveal" style="transition-delay: 200ms;">
-                    <div class="h-48 w-full bg-slate-800 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-tr from-brand-blue/20 to-green-400/20 group-hover:scale-110 transition-transform duration-700"></div>
-                        <i class="fa-solid fa-shield-halved absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-6xl text-white/10 group-hover:text-brand-blue/50 transition-colors duration-500"></i>
-                        <div class="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-lg border border-white/10">
-                            <span class="text-xs font-bold text-brand-blue uppercase">Ciberseguridad</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center gap-4 text-xs text-slate-500 mb-4">
-                            <span><i class="fa-regular fa-calendar mr-1"></i> 15 Nov, 2025</span>
-                            <span><i class="fa-regular fa-clock mr-1"></i> 8 min</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-3 group-hover:text-brand-blue transition-colors">Seguridad E-commerce</h3>
-                        <p class="text-slate-400 text-sm line-clamp-3 mb-6">Guía esencial de seguridad para dueños de negocios online. SSL, Firewalls y buenas prácticas.</p>
-                        <a href="#" class="inline-flex items-center text-sm font-bold text-white hover:text-brand-blue transition-colors">Leer Artículo <i class="fa-solid fa-chevron-right ml-2 text-xs"></i></a>
-                    </div>
-                </article>
-            </div>
-
-            <div class="relative rounded-3xl p-1 bg-gradient-to-r from-brand-cyan via-brand-purple to-brand-blue reveal">
-                <div class="bg-[#0f172a] rounded-[20px] p-8 md:p-12 text-center relative overflow-hidden">
-                    <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
-                    <div class="relative z-10 max-w-2xl mx-auto">
-                        <i class="fa-regular fa-paper-plane text-4xl text-white mb-6 animate-bounce"></i>
-                        <h3 class="text-3xl font-bold text-white mb-4">Únete al <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan to-brand-purple">Dinobot Squad</span></h3>
-                        <p class="text-slate-400 mb-8">Recibe tips de tecnología y noticias. Cero spam.</p>
-                        <form class="flex flex-col sm:flex-row gap-4">
-                            <input type="email" placeholder="Tu correo electrónico..." class="flex-1 bg-slate-800 border border-slate-700 text-white px-6 py-4 rounded-xl focus:outline-none focus:border-brand-cyan transition-colors" required>
-                            <button type="submit" class="bg-brand-cyan text-black font-bold px-8 py-4 rounded-xl hover:scale-105 hover:bg-white transition-all interactable">Suscribirme</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer id="contacto" class="bg-[#020617] pt-24 pb-12 border-t border-white/10 relative">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12 mb-16">
-            
-            <div class="md:col-span-2">
-                <a href="#" class="flex items-center gap-2 mb-6 group">
-                    <i class="fa-solid fa-dragon text-3xl text-brand-cyan group-hover:drop-shadow-[0_0_10px_rgba(34,211,238,0.8)] transition-all"></i>
-                    <span class="font-bold text-2xl text-white">DINOBOT</span>
-                </a>
-                <p class="text-slate-500 max-w-sm mb-8">
-                    Elevando estándares digitales. Creamos experiencias que fusionan arte y tecnología para marcas que se atreven a innovar.
+        <div class="max-w-[1600px] mx-auto px-6 relative z-10 grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-brand-purple font-bold tracking-widest text-sm mb-2 uppercase">Agencia Digital</h2>
+                <h1 class="text-6xl md:text-8xl font-black mb-6 font-display leading-[0.9]">
+                    CREA TU <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan to-brand-purple">LEGADO</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-lg font-sans">
+                    Desarrollo web de alto rendimiento, diseño gráfico y soluciones tecnológicas con el sello único de Erik.
                 </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#portafolio" class="bg-brand-cyan text-black font-bold px-8 py-4 rounded-sm hover:scale-105 transition-transform">
+                        VER PROYECTOS
+                    </a>
+                    <a href="#contacto" class="border-2 border-slate-900 dark:border-white px-8 py-4 font-bold rounded-sm hover:bg-slate-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors">
+                        COTIZAR AHORA
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hidden md:block relative">
+                 <div class="xbox-card w-full aspect-video bg-gray-800 rounded-lg overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-all duration-500 group relative">
+                    <img src="https://images.unsplash.com/photo-1614064641938-3e82161959cd?q=80&w=1000&auto=format&fit=crop" 
+                         class="img-cover group-hover:scale-110 transition-transform duration-700">
+                    
+                    <div class="absolute bottom-0 left-0 p-6 bg-gradient-to-t from-black to-transparent w-full">
+                        <span class="text-white font-bold text-xl">Potencia Digital</span>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="portafolio" class="py-24 bg-gray-100 dark:bg-[#1a1a1a] transition-colors">
+        <div class="max-w-[1600px] mx-auto px-6">
+            <div class="flex justify-between items-end mb-10">
+                <h2 class="text-4xl font-black font-display uppercase">Proyectos Destacados</h2>
+                <span class="text-sm font-bold opacity-60">EXPLORAR TODO <i class="fa-solid fa-chevron-right ml-1"></i></span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-[300px]">
                 
-                <div class="flex flex-wrap gap-3">
-                    <a href="#" target="_blank" class="w-10 h-10 rounded-lg bg-slate-900 border border-white/10 flex items-center justify-center text-slate-400 transition-all duration-300 interactable hover:bg-white hover:text-black hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(255,255,255,0.4)]"><i class="fa-brands fa-github text-xl"></i></a>
-                    <a href="https://facebook.com/erikmexa06" target="_blank" class="w-10 h-10 rounded-lg bg-slate-900 border border-white/10 flex items-center justify-center text-slate-400 transition-all duration-300 interactable hover:bg-[#1877F2] hover:text-white hover:border-[#1877F2] hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(24,119,242,0.4)]"><i class="fa-brands fa-facebook-f text-lg"></i></a>
-                    <a href="https://instagram.com/erikmexa06" target="_blank" class="w-10 h-10 rounded-lg bg-slate-900 border border-white/10 flex items-center justify-center text-slate-400 transition-all duration-300 interactable hover:bg-gradient-to-br hover:from-[#833AB4] hover:via-[#FD1D1D] hover:to-[#FCAF45] hover:text-white hover:border-transparent hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(253,29,29,0.4)]"><i class="fa-brands fa-instagram text-xl"></i></a>
-                    <a href="#" target="_blank" class="w-10 h-10 rounded-lg bg-slate-900 border border-white/10 flex items-center justify-center text-slate-400 transition-all duration-300 interactable hover:bg-[#FF4500] hover:text-white hover:border-[#FF4500] hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(255,69,0,0.4)]"><i class="fa-brands fa-reddit-alien text-xl"></i></a>
-                    <a href="https://twitter.com/erik_1945" target="_blank" class="w-10 h-10 rounded-lg bg-slate-900 border border-white/10 flex items-center justify-center text-slate-400 transition-all duration-300 interactable hover:bg-black hover:text-white hover:border-white/40 hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]"><i class="fa-brands fa-x-twitter text-lg"></i></a>
-                    <a href="#" target="_blank" class="w-10 h-10 rounded-lg bg-slate-900 border border-white/10 flex items-center justify-center text-slate-400 transition-all duration-300 interactable hover:bg-[#FF0000] hover:text-white hover:border-[#FF0000] hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(255,0,0,0.4)]"><i class="fa-brands fa-youtube text-lg"></i></a>
+                <a href="https://www.panaderiajurassic.com.mx" target="_blank" class="xbox-card relative group bg-black md:col-span-2 overflow-hidden rounded-md cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?q=80&w=1000&auto=format&fit=crop" 
+                         alt="Panadería Jurassic" class="img-cover opacity-70 group-hover:opacity-100 transition-opacity">
+                    
+                    <div class="absolute bottom-0 left-0 p-8 w-full bg-gradient-to-t from-black/90 to-transparent">
+                        <span class="bg-brand-cyan text-black text-xs font-bold px-2 py-1 mb-2 inline-block">WEB CORPORATIVA</span>
+                        <h3 class="text-white text-3xl font-bold font-display">Panadería Jurassic</h3>
+                    </div>
+                </a>
+
+                <a href="https://www.canva.com/design/DAFvgcGvL3U/7rMpTR9j4pf3v-xx1ZBcTQ/edit?utm_content=DAFvgcGvL3U&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" target="_blank" class="xbox-card relative group bg-gray-800 md:row-span-2 overflow-hidden rounded-md cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1626785774583-b63d04f911be?q=80&w=1000&auto=format&fit=crop" 
+                         alt="Diseño Canva" class="img-cover opacity-70 group-hover:opacity-100 transition-opacity">
+                    
+                    <div class="absolute bottom-0 left-0 p-6 w-full bg-gradient-to-t from-brand-purple/90 to-transparent">
+                        <span class="bg-white text-black text-xs font-bold px-2 py-1 mb-2 inline-block">DISEÑO GRÁFICO</span>
+                        <h3 class="text-white text-2xl font-bold font-display">Identidad Visual</h3>
+                        <p class="text-white/80 text-sm mt-2">Assets creados en Canva</p>
+                    </div>
+                </a>
+
+                <div class="xbox-card relative group bg-gray-900 overflow-hidden rounded-md cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop" 
+                         alt="Proyecto Clon" class="img-cover opacity-60 group-hover:opacity-100 transition-opacity">
+                    
+                    <div class="absolute bottom-0 left-0 p-6 w-full bg-gradient-to-t from-black to-transparent">
+                         <span class="bg-blue-500 text-white text-xs font-bold px-2 py-1 mb-2 inline-block">PRÁCTICA</span>
+                        <h3 class="text-white text-xl font-bold">Clon de Interfaz</h3>
+                    </div>
+                </div>
+
+                <div class="xbox-card relative group bg-brand-cyan flex items-center justify-center p-8 rounded-md text-center">
+                    <div>
+                        <i class="fa-solid fa-code text-5xl mb-4 text-black"></i>
+                        <h3 class="text-2xl font-bold text-black">Tu Proyecto Aquí</h3>
+                        <p class="text-black/70 text-sm mt-2 font-bold">¡Empecemos hoy!</p>
+                    </div>
+                </div>
+
+                 <div class="xbox-card relative group bg-[#107C10] md:col-span-2 flex items-center overflow-hidden rounded-md">
+                    <div class="p-8 w-1/2 relative z-10">
+                        <h3 class="text-2xl font-bold text-white">Desarrollo a medida</h3>
+                        <p class="text-white/80 text-sm mt-2">No usamos plantillas genéricas. Todo es código propio.</p>
+                    </div>
+                    <div class="w-1/2 h-full absolute right-0 top-0">
+                         <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1000&auto=format&fit=crop" class="img-cover opacity-50">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer id="contacto" class="bg-white dark:bg-[#111111] pt-20 border-t border-gray-200 dark:border-white/10 transition-colors">
+        <div class="max-w-[1600px] mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+            
+            <div class="lg:col-span-1">
+                <h3 class="text-2xl font-black font-display mb-6 tracking-tighter">DINOBOT COMPANY</h3>
+                <p class="text-gray-500 dark:text-gray-400 mb-8 text-sm leading-relaxed">
+                    © 2025 Dinobot Studios. Todos los derechos reservados.<br>
+                    Creado con pasión y código en Hidalgo, México.
+                </p>
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-gray-100 dark:bg-white/10 rounded-full text-xs font-bold">
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    Sistemas Operativos
+                </div>
+            </div>
+
+            <div class="lg:col-span-2">
+                <h4 class="font-bold mb-8 uppercase text-sm tracking-wider">Comunidad & Redes</h4>
+                <div class="flex flex-wrap gap-4">
+                    <a href="https://facebook.com/erikmexa06" target="_blank" class="social-btn w-12 h-12 flex items-center justify-center rounded-full bg-gray-100 dark:bg-white/5 hover:text-white hover:bg-[#1877F2] text-[#1877F2] dark:text-gray-300">
+                        <i class="fa-brands fa-facebook-f text-xl relative z-10"></i>
+                    </a>
+                    <a href="https://instagram.com/erikmexa06" target="_blank" class="social-btn w-12 h-12 flex items-center justify-center rounded-full bg-gray-100 dark:bg-white/5 hover:text-white hover:bg-[#E1306C] text-[#E1306C] dark:text-gray-300">
+                        <i class="fa-brands fa-instagram text-xl relative z-10"></i>
+                    </a>
+                    <a href="https://twitter.com/erik_1945" target="_blank" class="social-btn w-12 h-12 flex items-center justify-center rounded-full bg-gray-100 dark:bg-white/5 hover:text-white hover:bg-black text-black dark:text-gray-300">
+                        <i class="fa-brands fa-x-twitter text-xl relative z-10"></i>
+                    </a>
+                    <a href="#" target="_blank" class="social-btn w-12 h-12 flex items-center justify-center rounded-full bg-gray-100 dark:bg-white/5 hover:text-white hover:bg-gray-900 text-gray-900 dark:text-gray-300">
+                        <i class="fa-brands fa-github text-xl relative z-10"></i>
+                    </a>
+                     <a href="#" target="_blank" class="social-btn w-12 h-12 flex items-center justify-center rounded-full bg-gray-100 dark:bg-white/5 hover:text-white hover:bg-[#FF0000] text-[#FF0000] dark:text-gray-300">
+                        <i class="fa-brands fa-youtube text-xl relative z-10"></i>
+                    </a>
                 </div>
             </div>
 
             <div>
-                <h4 class="text-white font-bold mb-6 border-b border-brand-cyan/30 inline-block pb-1">Contacto</h4>
-                <ul class="space-y-4 text-slate-400">
-                    <li class="flex items-center gap-3 group interactable cursor-pointer">
-                        <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center group-hover:bg-brand-cyan group-hover:text-black transition-colors"><i class="fa-brands fa-whatsapp"></i></div>
-                        <span class="text-sm group-hover:text-white transition-colors">+52 56 45 20 09 67</span>
-                    </li>
-                    <li class="flex items-center gap-3 group interactable cursor-pointer">
-                        <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center group-hover:bg-brand-purple group-hover:text-white transition-colors"><i class="fa-regular fa-envelope"></i></div>
-                        <span class="text-sm group-hover:text-white transition-colors">coronelefa113@gmail.com</span>
-                    </li>
-                    <li class="flex items-center gap-3 group interactable cursor-pointer">
-                        <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center group-hover:bg-brand-blue group-hover:text-white transition-colors"><i class="fa-solid fa-location-dot"></i></div>
-                        <span class="text-sm group-hover:text-white transition-colors">Ciudad de México</span>
-                    </li>
-                </ul>
-            </div>
-
-             <div>
-                <h4 class="text-white font-bold mb-6 border-b border-brand-purple/30 inline-block pb-1">Legal</h4>
-                <ul class="space-y-2 text-slate-400 text-sm">
-                    <li><a href="#" class="hover:text-brand-cyan transition-colors interactable">Política de Privacidad</a></li>
-                    <li><a href="#" class="hover:text-brand-cyan transition-colors interactable">Términos de Servicio</a></li>
-                    <li><a href="#" class="hover:text-brand-cyan transition-colors interactable">Aviso Legal</a></li>
-                </ul>
+                <h4 class="font-bold mb-8 uppercase text-sm tracking-wider">Contáctanos</h4>
+                <form onsubmit="event.preventDefault();" class="space-y-4">
+                    <input type="email" placeholder="Tu correo electrónico" class="w-full bg-gray-100 dark:bg-white/5 border-none p-4 rounded-sm focus:ring-2 focus:ring-brand-cyan outline-none transition-all">
+                    <button class="w-full bg-slate-900 dark:bg-white text-white dark:text-black font-bold py-4 rounded-sm hover:opacity-90 transition-opacity">
+                        SUSCRIBIRSE
+                    </button>
+                    <p class="text-xs text-gray-400 text-center">No enviamos spam. Solo calidad.</p>
+                </form>
             </div>
         </div>
-        
-        <div class="text-center border-t border-white/5 pt-8 mx-6">
-            <p class="text-slate-600 text-xs tracking-widest uppercase">
-                © 2025 Dinobot Company. Code by Erik.
-            </p>
+
+        <div class="bg-gray-50 dark:bg-black py-6 text-center text-xs font-bold text-gray-400 uppercase tracking-widest">
+            DINOBOT COMPANY <span class="mx-2 text-brand-cyan">///</span> EST. 2025
         </div>
     </footer>
 
-    <a href="https://wa.me/525645200967" target="_blank" class="fixed bottom-8 right-8 z-50 group interactable">
-        <span class="absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-20 animate-ping"></span>
-        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center text-white text-3xl shadow-[0_0_20px_rgba(34,197,94,0.4)] group-hover:scale-110 transition-transform">
-            <i class="fa-brands fa-whatsapp"></i>
-        </div>
-    </a>
-
     <script>
-        function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('hidden'); }
+        // 1. CONTROL DEL TEMA (CLARO / OSCURO)
+        function toggleTheme() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('opacity-100', 'translate-y-0'); });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach((el) => {
-            el.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-700', 'ease-out');
-            observer.observe(el);
-        });
-
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if(window.scrollY > 50) nav.classList.add('border-b', 'border-white/10', 'bg-[#020617]/90');
-            else nav.classList.remove('border-b', 'border-white/10', 'bg-[#020617]/90');
-        });
-
-        const cursor = document.getElementById('custom-cursor');
-        const interactables = document.querySelectorAll('.interactable');
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
-        interactables.forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
-        });
-
-        document.querySelectorAll('.tilt-card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const rotateX = ((y - rect.height/2) / rect.height/2) * -10; 
-                const rotateY = ((x - rect.width/2) / rect.width/2) * 10;
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
-            });
-        });
+        // Cargar tema guardado o defecto
+        if (localStorage.getItem('theme') === 'light') {
+            document.documentElement.classList.remove('dark');
+        } else {
+            document.documentElement.classList.add('dark');
+        }
     </script>
 </body>
 </html>
